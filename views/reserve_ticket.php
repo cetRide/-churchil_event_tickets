@@ -8,7 +8,7 @@ $vip_price =  $_COOKIE["Vip_price"];
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include('../views/head.php') ?>
+<?php include('../utils/head.php') ?>
 <?php require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\manage_events.php'); ?>
 
 <style>
@@ -64,7 +64,8 @@ $vip_price =  $_COOKIE["Vip_price"];
             </form>
         </div>
     </main>
-    <?php include('../views/bottom.php') ?>
+    <?php include('../views/footer.php') ?>
+    <?php include('../utils/bottom.php') ?>
 </body>
 
 </html>

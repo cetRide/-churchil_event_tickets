@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include('../views/head.php') ?>
+<?php include('../utils/head.php') ?>
 <?php require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\manage_events.php'); ?>
 
 <style>
@@ -111,8 +111,7 @@
             </a>
         </div>
         <!--/.Carousel Wrapper-->
-        <div>
-            <h1 class="my-5">Footer to reside here </h1>
-        </div>
-    </main> <?php include('../views/bottom.php') ?>
+    </main> 
+    <?php include('../views/footer.php') ?>
+    <?php include('../utils/bottom.php') ?>
 </body>

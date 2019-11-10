@@ -1,4 +1,4 @@
-<?php include('../views/head.php');
+<?php include('../utils/head.php');
 session_start();
 
 if (!(isset($_SESSION['email']))) {
@@ -136,7 +136,8 @@ if (!(isset($_SESSION['email']))) {
                 </div>
             </div>
         </main>
-        <?php include('../views/bottom.php') ?>
+        <?php include('../views/footer.php') ?>
+        <?php include('../utils/bottom.php') ?>
     </body>
 
     </html>
