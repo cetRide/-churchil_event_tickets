@@ -21,6 +21,8 @@ $vip_price =  $_COOKIE["Vip_price"];
     <?php include('../views/navbar.php') ?>
     <main class="container">
         <div>
+            <img src="../images/logo.png" style="width: 50%; height: 40%;">
+
             <p>Event name : <?php echo $event_name; ?></p>
             <p>regular price : <?php echo $regular_price; ?></p>
             <p>Vip price : <?php echo $vip_price; ?></p>

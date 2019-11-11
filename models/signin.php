@@ -30,7 +30,7 @@ class signin extends dbconnection
                         //get user into the system
                         session_start();
                         $_SESSION['email'] = $row['email'];
-                        header("Location: http://127.0.0.1/churchil_event_tickets/views/admin_dash.php");
+                        header("Location: ../views/events.php");
                     } catch (Exception $e) {
                         echo 'Error Can not Acces the Index page' . $e->getMessage();
                     }

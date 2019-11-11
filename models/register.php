@@ -7,7 +7,7 @@ class register extends dbconnection
     public function __construct()
     { }
 
-       public function checkEmailIfExists($email)
+    public function checkEmailIfExists($email)
     {
         $search = "SELECT * FROM churchill_event_tickets.customer_accounts WHERE email= ?";
         $pre = $this->connectDb()->prepare($search);
@@ -85,7 +85,7 @@ class register extends dbconnection
             $_SESSION['email'] = $email;
             echo '<script> alert(\'Account created successfully.\')</script>';
             echo '<script> window.open(\'../index.php\',\'_self\')</script>';
-            header("Location: http://127.0.0.1/churchil_event_tickets/views/admin_dash.php");
+            header("Location: ../views/events.php");
         } catch (Exception $e) {
             echo 'Error Can not Acces the Index page' . $e->getMessage();
         }

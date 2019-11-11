@@ -84,7 +84,7 @@
         </div>
         </div>
     </main>
-    <?php include('utils/bottom.html') ?>
+    <?php include('utils/bottom.php') ?>
 </body>
 
 </html>
