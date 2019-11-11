@@ -1,4 +1,5 @@
 <?php
+session_start();
 $id = $_COOKIE["Event"];
 $event_name = $_COOKIE["Event_name"];
 $regular_price = $_COOKIE["Regular_price"];
@@ -18,55 +19,91 @@ $vip_price =  $_COOKIE["Vip_price"];
 </style>
 
 <body style="background-color: whitesmoke">
-    <?php include('../views/navbar.php') ?>
+    <?php include('../utils/navbar.php') ?>
     <main class="container">
-        <div>
-            <img src="../images/logo.png" style="width: 50%; height: 40%;">
-
-            <p>Event name : <?php echo $event_name; ?></p>
-            <p>regular price : <?php echo $regular_price; ?></p>
-            <p>Vip price : <?php echo $vip_price; ?></p>
-            <p>You are only allowed to book a maximum of 5 tickets</p>
-            <form action="../controllers/reservation.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
-                <div class="mb-2">
-
-                    <div class="form-group">
-                        <label for="viptickets">Vip Tickets</label>
-                        <select id="viptickets" class="custom-select" name="vip_quantity">
-                            <option value="0">-- None --</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
+        <div class="mt-2">
+            <img src="../images/logo.png" style="width: 40%; height: 30%;">
+            <div class="text-center">
+                <p class="h4"><?php echo $event_name; ?></p>
+            </div>
+            <div class="col-md-5 ml-auto mr-auto row d-flex justify-content-between">
+                <div>
+                    <p>Regular Tickets</p>
+                    <p>@<?php echo $regular_price; ?>/=</p>
                 </div>
-                <div class="mb-2">
-
-                    <div class="form-group">
-                        <label for="tickects">Regular Tickets</label>
-                        <select id="tickects" class="custom-select" name="regular_quantity" id="">
-                            <option value="0">-- None --</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
+                <div>
+                    <p>VIP Tickets</>
+                        <p>@<?php echo $vip_price; ?>/=</p>
                 </div>
-                <div class="mb-2">
-                    <label for="venue">Email Address</label>
-                    <input class="form-control form-control-sm" type="email" name="email" required>
-                </div>
-                <button class="btn btn-primary p-3" type="submit" name="reserve_ticket" style="border-radius: 25px;"> Reserve ticket</button>
+            </div>
+            <div class="col-md-5 ml-auto mr-auto">
+                <p class="font-weight-bold text-warning">You are only allowed to book a maximum of 5 tickets</p>
+                <form action="../controllers/reservation.php" method="POST">
+                    <?php
+                    if (isset($_SESSION['errors']) && $_SESSION['errors'] != null) {
+                        // display error
 
-            </form>
+                        ?>
+
+                        <div class="alert alert-danger alert-dismissable" role="alert">
+                            <button class="close" data-dismiss="alert">
+                                <small><sup>x</sup></small>
+                            </button>
+                            <?php echo $_SESSION['errors'];
+                                $_SESSION['errors'] = null; ?>
+                        </div>
+
+                    <?php
+                    }
+                    if (isset($_SESSION['messages']) && $_SESSION['messages'] != null) {
+
+                        ?>
+
+                        <div class="alert alert-success alert-dismissable" role="alert">
+                            <button class="close" data-dismiss="alert">
+                                <small><sup>x</sup></small>
+                            </button>
+                            <?php echo $_SESSION['messages'];
+                                $_SESSION['messages'] = null; ?>
+                        </div>
+
+
+                    <?php
+                    }
+                    ?>
+                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    <div class="form-row mb-4">
+                        <div class="form-group col">
+                            <label for="viptickets">Vip Tickets</label>
+                            <select id="viptickets" class="custom-select" name="vip_quantity" required>
+                                <option value="0">-- None --</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="tickects">Regular Tickets</label>
+                            <select id="tickects" class="custom-select" name="regular_quantity" id="" required>
+                                <option value="0">-- None --</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-2" name="email" placeholder="Your email address" required>
+
+                        <button class="btn btn-primary text-center" type="submit" name="reserve_ticket" style="border-radius: 15px;"> Reserve ticket</button>
+
+                </form>
+            </div>
         </div>
     </main>
-    <?php include('../views/footer.php') ?>
+    <?php include('../utils/footer.php') ?>
     <?php include('../utils/bottom.php') ?>
 </body>
 

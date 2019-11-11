@@ -16,8 +16,6 @@ class manageEvents extends dbconnection
     public function __construct()
     { }
 
-
-
     public function checkEventNamefExists($name)
     {
         $search = "SELECT * FROM churchill_event_tickets.events WHERE name= ?";
@@ -29,6 +27,35 @@ class manageEvents extends dbconnection
         } else {
             return true;
         }
+    }
+    public function returnTicketAllocation($id)
+    {
+        $query = "SELECT `regular_allocation`, `vip_allocation` FROM churchill_event_tickets.events WHERE event_id= ? ";
+        $pre = $this->connectDb()->prepare($query);
+        $pre->execute([$id]);
+        while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
+            $array_results = array($row['regular_allocation'], $row['vip_allocation']);
+        }
+        return  $array_results;
+    }
+
+    public function remainingTickets($id)
+    {
+        $query = "SELECT `vip_ticket_quantity`, `regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE event_id= ? ";
+        $pre = $this->connectDb()->prepare($query);
+        $pre->execute([$id]);
+        $vip_total = 0;
+        $regular_total = 0;
+        while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
+            $vip_total = $vip_total + $row['vip_ticket_quantity'];
+            $regular_total = $regular_total + $row['regular_ticket_quantity'];
+        }
+        $allocation_tickets_no = $this->returnTicketAllocation($id);
+
+        $remVip =  $allocation_tickets_no[0] - $vip_total;
+        $remRegular =  $allocation_tickets_no[1] - $regular_total;
+        $remaining_tickets = array($remVip,  $remRegular);
+        return $remaining_tickets;
     }
 
     public function getEvents()

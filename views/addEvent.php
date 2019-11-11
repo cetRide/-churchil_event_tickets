@@ -2,7 +2,7 @@
 session_start();
 
 if (!(isset($_SESSION['email']))) {
-    header('Location: viewEvent.php');
+    header('Location: ../index.php');
 } else {
 
     ?>
@@ -30,7 +30,7 @@ if (!(isset($_SESSION['email']))) {
 
     <body style="background-color: whitesmoke">
         <main>
-            <?php include('../views/navbar.php') ?>
+            <?php include('../utils/navbar.php') ?>
             <div class="container">
                 <h1 class="font-weight-bold text-center mt-3">Create a new Event</h1>
                 <hr>
@@ -136,7 +136,7 @@ if (!(isset($_SESSION['email']))) {
                 </div>
             </div>
         </main>
-        <?php include('../views/footer.php') ?>
+        <?php include('../utils/footer.php') ?>
         <?php include('../utils/bottom.php') ?>
     </body>
 
