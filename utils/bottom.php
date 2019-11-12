@@ -4,7 +4,7 @@
 <script type="text/javascript" src="mdb/js/mdb.min.js"></script>
 <script>
     $('#form-popover').popover({
-    //    trigger: 'hover',
+        //    trigger: 'hover',
         content: $('#form').parent().html(),
         sanitize: false,
         html: true,

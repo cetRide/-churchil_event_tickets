@@ -10,4 +10,4 @@
     <link href="mdb/css/mdb.min.css" rel="stylesheet">
     <link href="mdb/css/style.min.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/png" href="../images/logo.png" />
-</head>
+  </head>

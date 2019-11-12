@@ -9,26 +9,7 @@ if (!(isset($_SESSION['email']))) {
     <!DOCTYPE html>
     <html lang="en">
 
-    <style>
-        .upload-btn-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            border-radius: 15px;
-            cursor: pointer;
-        }
-
-        .upload-btn-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-    </style>
-
-    <body style="background-color: whitesmoke">
+      <body style="background-color: whitesmoke">
         <main>
             <?php include('../utils/navbar.php') ?>
             <div class="container">
@@ -89,14 +70,14 @@ if (!(isset($_SESSION['email']))) {
                             <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="event_description" required></textarea>
                         </div>
                         <label for="banner">Event Banner</label>
-                        <div>
-                            <div class="upload-btn-wrapper border bg-white text-center p-5">
-                                <i class="fas fa-camera text-primary" style="font-size: 45px; cursor: pointer;"></i>
-                                <h5>Add Event Image</h5>
-                                <small>Choose compelling image that brings your event to life!!</small>
-                                <input type="file" name="file" />
-                            </div>
-                        </div>
+
+                        <div class="col-md-4 border bg-white text-center p-1" style="border-radius:15px;">
+                            <i class="fas fa-camera text-primary" style="font-size: 45px; cursor: pointer;"></i>
+                            <h5>Add Event Image</h5>
+                            <small>Choose compelling image that brings your event to life!!</small>
+                            <input type="file" name="file" />
+                                                  </div>
+
                         <hr>
                         <p class="h4">
                             <span class="text-danger">2</span>. Create Tickets
