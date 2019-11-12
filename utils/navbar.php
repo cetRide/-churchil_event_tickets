@@ -1,6 +1,6 @@
 <!-- Navbar -->
 <?php
-session_start();
+// session_start();
 $action = "../controllers/login.php";
 $logout = "../controllers/logout.php";
 $home_link = "../index.php";

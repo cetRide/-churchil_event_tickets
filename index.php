@@ -45,7 +45,7 @@
                         <div class="carousel-item <?php echo $slide_active; ?>">
                             <div class="">
                                 <div class="ml-3">
-                                    <p><i class="far fa-heart text-danger"></i> <em class="h3 my-5 text-primary"><?php echo $event['name']; ?></em>
+                                    <p><i class="far fa-heart text-danger"></i> <em class="h3 my-5 text-primary"><?php echo $event['name'] = ucfirst($event['name']); ?></em>
                                     </p>
                                 </div>
 
@@ -59,7 +59,7 @@
                                             <div>
                                                 <p class="h4 text-center text-primary my-3">Event description</p>
                                                 <div class="col-md-8 ml-auto mr-auto border border-success p-4" style="border-radius: 15px;">
-                                                    <p><?php echo $event['description']; ?></p>
+                                                    <p><?php echo $event['description'] = ucfirst($event['description']); ?></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-7 ml-auto mr-auto p-4 row d-flex justify-content-between" style="border-radius: 15px;">
@@ -84,11 +84,11 @@
                                     <div class=" mt-3 px-1">
                                         <div class="d-inline-block px-4">
                                             <p class="text-danger font-weight-bold"><i class="fas fa-map-marker-alt mr-4"></i>Venue</p>
-                                            <p><?php echo $event['location']; ?></p>
+                                            <p><?php echo $event['location'] = ucfirst($event['location']); ?></p>
                                         </div>
                                         <div class="d-inline-block px-4">
                                             <p class="text-danger font-weight-bold"><i class="far fa-clock mr-4"></i>Date</p>
-                                            <p><?php echo $event['time']; ?></p>
+                                            <p><?php echo $event['time'] = date("F j, Y, g:i a"); ?></p>
                                         </div>
                                         <div class=" d-inline-block px-4">
                                             <p class="text-warning font-weight-bold"><i class="fas fa-ticket-alt mr-4"></i>VIP Tickets</p>

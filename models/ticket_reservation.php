@@ -1,6 +1,6 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\database_connection.php');
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\vendor\autoload.php');
+require_once('database_connection.php');
+require_once('../vendor/autoload.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -36,18 +36,21 @@ class TicketReservation extends dbconnection
     public function emailBodyElements($id, $vip_quantity, $regular_quantity)
     {
         $event = $this->getEvent($id);
-        $vip_total_price = $event[0] * $vip_quantity;
-        $regular_total_price = $event[1] * $regular_quantity;
-        $total_price = $vip_total_price + $regular_total_price;
+        $vip_total_price = ($event[0] * $vip_quantity);
+        $regular_total_price = ($event[1] * $regular_quantity);
+        $total_price = ($vip_total_price + $regular_total_price);
 
         return array($total_price, $event[2], $event[3], $event[4]);
     }
     public function sendMail($id, $email, $vip_quantity, $regular_quantity)
     {
         $mailbody = $this->emailBodyElements($id, $vip_quantity, $regular_quantity);
+        $name = ucfirst($mailbody[1]);
+        $location = ucfirst($mailbody[2]);
+        $date = date("F j, Y, g:i a");
         $mail = new PHPMailer(true);
         try {
-            $mail->SMTPDebug = 2;
+            // $mail->SMTPDebug = 2;
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com;';
             $mail->SMTPAuth   = true;
@@ -68,8 +71,8 @@ class TicketReservation extends dbconnection
                 <p>You have successfully reserved your ticket(s).</p>
                 <p>Vip: $vip_quantity Tickets</p>
                 <p>Regular: $regular_quantity Tickets</p>
-                <p>Total Cost: $mailbody[0] Tickets</p>
-                <p>For <em>$mailbody[1] </em>to be held at  <em>$mailbody[2]</em>on <em>$mailbody[3]</em></p>
+                <p>Total Cost: $mailbody[0]/=</p>
+                <p>For <b>$name </b>to be held at  <b>$location</b> on <b>$date</b></p>
                 <p>Thank you.</p>
                 <p>Yours,</p>
                 <span>Churchill Laugh Industry Team</span></p>
@@ -77,29 +80,31 @@ class TicketReservation extends dbconnection
         </div>";
             $mail->AltBody = 'Body in plain text for non-HTML mail clients';
             $mail->send();
-            return true;
+            return;
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            return false;
+            echo "Error occured in sending the email.Try again by refreshing your page or Check your internet connectivity";
+            return;
         }
     }
     public function totalInputTickets($vip_quantity, $regular_quantity)
     {
         return $vip_quantity + $regular_quantity;
     }
-    public function totalTicketsInDbOfUser($email)
+    public function totalTicketsInDbOfUser($id, $email)
     {
-        $query = "SELECT `vip_ticket_quantity`, `regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE email= ? ";
-        $pre = $this->connectDb()->prepare($query);
-        $pre->execute([$email]);
-        $total = 0;
-        while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
-            $regular = $row['regular_ticket_quantity'];
-            $vip = $row['vip_ticket_quantity'];
-            $total = $regular + $vip;
+        $sql = "SELECT `vip_ticket_quantity`,`regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE email= :email AND event_id=:id";
+        $stmt = $this->connectDb()->prepare($sql);
+        $stmt->execute([':email' => $email, ':id' => $id]);
+        $result = $stmt->fetchAll();
+        $regular_total = 0;
+        $vip_total = 0;
+        foreach ($result as $array) {
+            $regular_total  += $array['regular_ticket_quantity'];
         }
-
-        return $total;
+        foreach ($result as $array) {
+            $vip_total  += $array['vip_ticket_quantity'];
+        }
+        return   $regular_total + $vip_total;
     }
 
     public function reserveTicket($id, $email, $vip_quantity, $regular_quantity)
@@ -111,20 +116,20 @@ class TicketReservation extends dbconnection
             $_SESSION['errors'] = $error;
             header('Location: ../views/reserve_ticket.php');
             return;
-        }
-        if ($this->totalInputTickets($vip_quantity, $regular_quantity) > 5) {
+        } elseif ($this->totalInputTickets($vip_quantity, $regular_quantity) > 5) {
             $error = "You're only allowed to book a maximum of 5 tickets";
             $_SESSION['errors'] = $error;
             header('Location: ../views/reserve_ticket.php');
             return;
-        } elseif ($this->totalTicketsInDbOfUser($email) >= 5) {
+        } elseif ($this->totalTicketsInDbOfUser($id, $email) == 5) {
+            echo "tickets are= $this->totalTicketsInDbOfUser($email)";
             $error = "Your tickets slots are already full";
             $_SESSION['errors'] = $error;
             header('Location: ../views/reserve_ticket.php');
             return;
-        } elseif (($this->totalInputTickets($vip_quantity, $regular_quantity) + $this->totalTicketsInDbOfUser($email)) > 5) {
+        } elseif (($this->totalInputTickets($vip_quantity, $regular_quantity) + $this->totalTicketsInDbOfUser($id, $email)) > 5) {
 
-            $remaining_slots = 5 - ($this->totalTicketsInDbOfUser($email));
+            $remaining_slots = 5 - ($this->totalTicketsInDbOfUser($id, $email));
             $error = "You only have $remaining_slots remaining slots";
             $_SESSION['errors'] = $error;
             header('Location: ../views/reserve_ticket.php');
@@ -141,10 +146,9 @@ class TicketReservation extends dbconnection
             try {
                 $this->connectDb()->exec($query);
                 $this->sendMail($id, $email, $vip_quantity, $regular_quantity);
-                if ($this->sendMail($id, $email, $vip_quantity, $regular_quantity) == true) {
-                    echo '<script> alert(\'Ticket Reserved Successfully.Check your mail for more info.Thank you\')</script>';
-                    echo '<script> window.open(\'../index.php\')</script>';
-                }
+                header('Location: ../index.php');
+                echo '<script> alert(\'Ticket Reserved Successfully.Check your mail for more info.Thank you\')</script>';
+                echo '<script> window.open(\'../index.php\')</script>';
             } catch (Exception $e) {
                 echo "ERROR: " . $e->getMessage();
             }

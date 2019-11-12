@@ -72,7 +72,7 @@ if (!isset($_SESSION['email'])) {
                                                             </div>
                                                             <div class="d-inline-block mb-2">
                                                                 <label for="starts">Event date & Time</label>
-                                                                <input class="form-control form-control-sm" type="text" name="date" value="<?php echo $event['time']; ?>" required>
+                                                                <input class="form-control form-control-sm" type="text" name="date" id="picker" onkeydown="return false" value="<?php echo $event['time']; ?>" required>
                                                             </div>
                                                             <div class="form-group mb-2">
                                                                 <label for="exampleFormControlTextarea3">Event Description</label>

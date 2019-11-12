@@ -9,7 +9,7 @@ if (!(isset($_SESSION['email']))) {
     <!DOCTYPE html>
     <html lang="en">
 
-      <body style="background-color: whitesmoke">
+    <body style="background-color: whitesmoke">
         <main>
             <?php include('../utils/navbar.php') ?>
             <div class="container">
@@ -24,9 +24,7 @@ if (!(isset($_SESSION['email']))) {
                         <?php
                             if (isset($_SESSION['errors']) && $_SESSION['errors'] != null) {
                                 // display error
-
                                 ?>
-
                             <div class="alert alert-danger alert-dismissable" role="alert">
                                 <button class="close" data-dismiss="alert">
                                     <small><sup>x</sup></small>
@@ -36,38 +34,24 @@ if (!(isset($_SESSION['email']))) {
                             </div>
 
                         <?php
-                            }
-                            if (isset($_SESSION['messages']) && $_SESSION['messages'] != null) {
-
-                                ?>
-
-                            <div class="alert alert-success alert-dismissable" role="alert">
-                                <button class="close" data-dismiss="alert">
-                                    <small><sup>x</sup></small>
-                                </button>
-                                <?php echo $_SESSION['messages'];
-                                        $_SESSION['messages'] = null; ?>
-                            </div>
-
-
-                        <?php
+                                unset($_SESSION['errors']);
                             }
                             ?>
                         <div class="mb-2">
                             <label for="name">Event Name</label>
-                            <input class="form-control form-control-lg" type="text" name="name" required>
+                            <input class="form-control form-control-lg" type="text" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required>
                         </div>
                         <div class="mb-2">
                             <label for="venue">Location/Venue</label>
-                            <input class="form-control form-control-lg" type="text" name="location" required>
+                            <input class="form-control form-control-lg" type="text" name="location" value="<?php echo isset($_POST['location']) ? $_POST['location'] : ''; ?>" required>
                         </div>
                         <div class="d-inline-block mb-2">
                             <label for="starts">Event date & Time</label>
-                            <input class="form-control form-control-lg" type="text" name="date" required>
+                            <input class="form-control form-control-lg" type="text" id="picker" onkeydown="return false" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required>
                         </div>
                         <div class="form-group mb-2">
                             <label for="exampleFormControlTextarea3">Event Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="event_description" required></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="event_description" value="<?php echo isset($_POST['event_description']) ? $_POST['event_description'] : ''; ?>" required></textarea>
                         </div>
                         <label for="banner">Event Banner</label>
 
@@ -76,7 +60,7 @@ if (!(isset($_SESSION['email']))) {
                             <h5>Add Event Image</h5>
                             <small>Choose compelling image that brings your event to life!!</small>
                             <input type="file" name="file" />
-                                                  </div>
+                        </div>
 
                         <hr>
                         <p class="h4">
@@ -93,18 +77,18 @@ if (!(isset($_SESSION['email']))) {
                                 </thead>
                                 <tr>
                                     <td>VIP</td>
-                                    <td class="p-4"> <input class="form-control form-control-sm" type="text" name="vip_quantity">
+                                    <td class="p-4"> <input class="form-control form-control-sm" type="text" name="vip_quantity" value="<?php echo isset($_POST['vip_quantity']) ? $_POST['vip_quantity'] : ''; ?>" required>
                                     </td>
-                                    <td><input class="form-control form-control-sm" type="text" name="vip_price">
+                                    <td><input class="form-control form-control-sm" type="text" name="vip_price" value="<?php echo isset($_POST['vip_price']) ? $_POST['vip_price'] : ''; ?>" required>
                                     </td>
 
                                 </tr>
                                 <tr></tr>
                                 <tr>
                                     <td>Regular</td>
-                                    <td class="p-3"> <input class="form-control form-control-sm" type="text" name="regular_quantity">
+                                    <td class="p-3"> <input class="form-control form-control-sm" type="text" name="regular_quantity" value="<?php echo isset($_POST['regular_quantity']) ? $_POST['regular_quantity'] : ''; ?>" required>
                                     </td>
-                                    <td> <input class="form-control form-control-sm" type="text" name="regular_price">
+                                    <td> <input class="form-control form-control-sm" type="text" name="regular_price" value="<?php echo isset($_POST['regular_price']) ? $_POST['regular_price'] : ''; ?>" required>
                                     </td>
                                 </tr>
                             </TABLE>

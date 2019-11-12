@@ -1,5 +1,5 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\register.php');
+require_once('../models/register.php');
 class signup extends register
 {
     private $name;

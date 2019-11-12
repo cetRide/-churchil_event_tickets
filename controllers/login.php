@@ -1,5 +1,5 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\signin.php');
+require_once('../models/signin.php');
 class login extends signin
 {
    private $email;

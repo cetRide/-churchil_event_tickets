@@ -1,5 +1,5 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\ticket_reservation.php');
+require_once('../models/ticket_reservation.php');
 
 if (isset($_POST['reserve_ticket'])) {
     $event_id = $_POST['id'];

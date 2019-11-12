@@ -6,7 +6,6 @@ $regular_price = $_COOKIE["Regular_price"];
 $vip_price =  $_COOKIE["Vip_price"];
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <?php include('../utils/head.php') ?>
@@ -24,8 +23,9 @@ $vip_price =  $_COOKIE["Vip_price"];
         <div class="mt-2">
             <img src="../images/logo.png" style="width: 40%; height: 30%;">
             <div class="text-center">
-                <p class="h4"><?php echo $event_name; ?></p>
+                <p class="h4"><?php echo $event_name = ucfirst($event_name); ?></p>
             </div>
+            <hr>
             <div class="col-md-5 ml-auto mr-auto row d-flex justify-content-between">
                 <div>
                     <p>Regular Tickets</p>
@@ -54,21 +54,7 @@ $vip_price =  $_COOKIE["Vip_price"];
                         </div>
 
                     <?php
-                    }
-                    if (isset($_SESSION['messages']) && $_SESSION['messages'] != null) {
-
-                        ?>
-
-                        <div class="alert alert-success alert-dismissable" role="alert">
-                            <button class="close" data-dismiss="alert">
-                                <small><sup>x</sup></small>
-                            </button>
-                            <?php echo $_SESSION['messages'];
-                                $_SESSION['messages'] = null; ?>
-                        </div>
-
-
-                    <?php
+                        unset($_SESSION['errors']);
                     }
                     ?>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">

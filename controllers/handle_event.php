@@ -1,6 +1,6 @@
 
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\manage_events.php');
+require_once('../models/manage_events.php');
 class handleEvent extends manageEvents
 {
     private $name;
@@ -109,10 +109,10 @@ if (isset($_POST['add_event'])) {
         $newEvent->getLocation(),
         $newEvent->getDate(),
         $newEvent->getDescription(),
-        $newEvent->getVip_price(),
         $newEvent->getVip_quantity(),
-        $newEvent->getRegular_price(),
-        $newEvent->getRegular_quantity()
+        $newEvent->getRegular_quantity(),
+        $newEvent->getVip_price(),
+        $newEvent->getRegular_price()
     );
 }
 
@@ -146,10 +146,10 @@ if (isset($_POST['edit_event'])) {
         $newEvent->getLocation(),
         $newEvent->getDate(),
         $newEvent->getDescription(),
-        $newEvent->getVip_price(),
         $newEvent->getVip_quantity(),
-        $newEvent->getRegular_price(),
-        $newEvent->getRegular_quantity()
+        $newEvent->getRegular_quantity(),
+        $newEvent->getVip_price(),
+        $newEvent->getRegular_price()
     );
 }
 
