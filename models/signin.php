@@ -1,5 +1,5 @@
 <?php
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\database_connection.php');
+require_once('database_connection.php');
 class signin extends dbconnection
 {
 
@@ -15,7 +15,7 @@ class signin extends dbconnection
         //no user
         if ($rows < 1) {
             echo '<script> alert(\'User does not exist.\')</script>';
-            echo '<script> window.open(\'../login.php\',\'_self\')</script>';
+            echo '<script> window.open(\'../\',\'_self\')</script>';
         } else {
 
             //get the password
@@ -23,8 +23,8 @@ class signin extends dbconnection
                 $verifiedPass = password_verify($password, $row['password']);
                 //password do not match
                 if (!$verifiedPass) {
-                    echo '<script> alert(\'Incorrect Password.\')</script>';
-                    echo '<script> window.open(\'../login.php\',\'_self\')</script>';
+                    echo '<script> alert(\'Invalid Credentials.\')</script>';
+                    echo '<script> window.open(\'../\',\'_self\')</script>';
                 } else {
                     try {
                         //get user into the system

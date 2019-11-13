@@ -90,11 +90,12 @@ class manageEvents extends dbconnection
         $vip_quantity,
         $regular_quantity,
         $vip_price,
-        $regular_price
+        $regular_price,
+        $banner
     ) {
-        $query = "UPDATE churchill_event_tickets.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=? WHERE `event_id` = ?";
+        $query = "UPDATE churchill_event_tickets.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=?, `banner`=? WHERE `event_id` = ?";
         $pre = $this->connectDb()->prepare($query);
-        $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $id]);
+        $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);        header('Location: ../views/events.php');
         header('Location: ../views/events.php');
     }
     public function submitEvent(
@@ -105,10 +106,11 @@ class manageEvents extends dbconnection
         $vip_quantity,
         $regular_quantity,
         $vip_price,
-        $regular_price
+        $regular_price,
+        $bunner
     ) {
 
-        session_start();
+        // session_start();
         $error = null;
         $messages = null;
 
@@ -146,8 +148,8 @@ class manageEvents extends dbconnection
         }
 
         $id = uniqid();
-        $createEvent = "INSERT INTO  churchill_event_tickets.events(event_id, name, description, location, time, vip_allocation, regular_allocation, vip_price, regular_price
-)  VALUES ('$id', '$name','$description','$location','$date','$vip_quantity','$regular_quantity','$vip_price','$regular_price'
+        $createEvent = "INSERT INTO  churchill_event_tickets.events(`event_id`, `name`, `description`, `location`, `banner`, `time`, `vip_allocation`, `regular_allocation`, `vip_price`, `regular_price`
+)  VALUES ('$id', '$name','$description','$location','$bunner','$date','$vip_quantity','$regular_quantity','$vip_price','$regular_price'
 ) ";
         try {
             $this->connectDb()->exec($createEvent);

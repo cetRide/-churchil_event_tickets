@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include('utils/head.php') ?>
-<?php require_once(realpath($_SERVER["DOCUMENT_ROOT"]) . '\churchil_event_tickets\models\manage_events.php'); ?>
+<?php require_once('models/manage_events.php'); ?>
 
 <style>
     .reserve-btn {
@@ -52,7 +52,7 @@
                                 <div class="card z-depth-5 hoverable">
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-md-5 mb-1 view overlay zoom">
-                                            <img src="images/event2.jpg" class="img-fluid rounded" style="height: 350px; width: 450px; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
+                                            <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 450px; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
                                         </div>
 
                                         <div class="col p-3">
