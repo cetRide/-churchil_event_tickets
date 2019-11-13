@@ -20,11 +20,11 @@ if (isset($_POST['reserve'])) {
     $location = $_POST['location'];
     $date = $_POST['date'];
 
-    setcookie("Event", $event_id, time() + (60), "/");
-    setcookie("Regular_price", $regular_price, time() + (60), "/");
-    setcookie("Vip_price", $vip_price, time() + (60), "/");
-    setcookie("Event_name", $event_name, time() + (60), "/");
-    setcookie("Location", $location, time() + (60), "/");
-    setcookie("Date", $date, time() + (60), "/");
+    setcookie("Event", $event_id, time() + (3600), "/");
+    setcookie("Regular_price", $regular_price, time() + (3600), "/");
+    setcookie("Vip_price", $vip_price, time() + (3600), "/");
+    setcookie("Event_name", $event_name, time() + (3600), "/");
+    setcookie("Location", $location, time() + (3600), "/");
+    setcookie("Date", $date, time() + (3600), "/");
     echo '<script> window.open(\'../views/reserve_ticket.php\',\'_self\')</script>';
 }

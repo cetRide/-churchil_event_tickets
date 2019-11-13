@@ -60,3 +60,6 @@ body {
 textarea[name=comment] {
     resize: none;
   }
+  .admin-btn {
+    border-radius: 15px;
+  }

@@ -52,7 +52,7 @@
                 ?>
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <button class="nav-link m-0 px-3 hoverable text-capitalize btn login-btn border border-danger text-danger admin-btn btn" title="LOG IN" id="form-popover" data-toggle="popover" data-placement="bottom">Admin</button>
+                        <button class="nav-link m-0 px-3 hoverable text-capitalize btn login-btn border border-danger text-danger admin-btn btn" title="LOG IN" id="form-popover" data-toggle="popover" data-placement="bottom">Log in</button>
                     </li>
                 </ul>
             <?php
