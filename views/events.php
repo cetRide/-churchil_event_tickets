@@ -80,10 +80,14 @@ if (!isset($_SESSION['email'])) {
                                                             </div>
                                                             <label for="banner">Event Banner</label>
                                                             <div>
-                                                                <div class="upload-btn-wrapper border bg-white text-center p-5">
+                                                                <div class="border bg-white text-center p-5">
+                                                                    <div>
+                                                                        <img src="../images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 250px; width: auto; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
+                                                                    </div>
+                                                                    <div>
+                                                                    </div>
                                                                     <i class="fas fa-camera text-danger" style="font-size: 45px; cursor: pointer;"></i>
-                                                                    <h5>Add Event Image</h5>
-                                                                    <small>Choose compelling image that brings your event to life!!</small>
+                                                                    <h5>Change event banner</h5>
                                                                     <input type="file" name="file" />
                                                                 </div>
                                                             </div>

@@ -56,10 +56,9 @@ if (!(isset($_SESSION['email']))) {
                         <label for="banner">Event Banner</label>
 
                         <div class="col-md-4 border bg-white text-center p-1" style="border-radius:15px;">
-                            <i class="fas fa-camera text-danger" style="font-size: 45px; cursor: pointer;"></i>
-                            <h5>Add Event Image</h5>
-                            <small>Choose compelling image that brings your event to life!!</small>
-                            <input type="file" name="file" />
+                            <p><input type="file" accept="image/*" name="file" id="file" onchange="loadFile(event)" style="display: none;"></p>
+                            <p><label for="file" style="cursor: pointer;">Upload event banner</label></p>
+                            <p><img id="output" width="200" /></p>
                         </div>
 
                         <hr>
@@ -103,6 +102,12 @@ if (!(isset($_SESSION['email']))) {
         </main>
         <?php include('../utils/footer.php') ?>
         <?php include('../utils/bottom.php') ?>
+        <script>
+            var loadFile = function(event) {
+                var image = document.getElementById('output');
+                image.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
     </body>
 
     </html>
