@@ -7,6 +7,8 @@ if (isset($_POST['reserve_ticket'])) {
     $vip_tickets = $_POST['vip_quantity'];
     $email = $_POST['email'];
     $ticketRes = new TicketReservation();
+    setcookie("Email", "", time() - 60, "/", "", 0);
+    setcookie("Email", $email, time() + (60), "/");
     $ticketRes->reserveTicket($event_id, $email, $vip_tickets, $regular_tickets);
 }
 
@@ -18,11 +20,11 @@ if (isset($_POST['reserve'])) {
     $location = $_POST['location'];
     $date = $_POST['date'];
 
-    setcookie("Event", $event_id, time() + (86400 * 30), "/");
-    setcookie("Regular_price", $regular_price, time() + (86400 * 30), "/");
-    setcookie("Vip_price", $vip_price, time() + (86400 * 30), "/");
-    setcookie("Event_name", $event_name, time() + (86400 * 30), "/");
-    setcookie("Location", $location, time() + (86400 * 30), "/");
-    setcookie("Date", $date, time() + (86400 * 30), "/");
+    setcookie("Event", $event_id, time() + (60), "/");
+    setcookie("Regular_price", $regular_price, time() + (60), "/");
+    setcookie("Vip_price", $vip_price, time() + (60), "/");
+    setcookie("Event_name", $event_name, time() + (60), "/");
+    setcookie("Location", $location, time() + (60), "/");
+    setcookie("Date", $date, time() + (60), "/");
     echo '<script> window.open(\'../views/reserve_ticket.php\',\'_self\')</script>';
 }

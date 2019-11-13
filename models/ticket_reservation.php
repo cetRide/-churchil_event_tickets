@@ -92,7 +92,7 @@ class TicketReservation extends dbconnection
     }
     public function totalTicketsInDbOfUser($id, $email)
     {
-        $sql = "SELECT `vip_ticket_quantity`,`regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE email= :email AND event_id=:id";
+        $sql = "SELECT `vip_ticket_quantity`,`regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE user_id= :email AND event_id=:id";
         $stmt = $this->connectDb()->prepare($sql);
         $stmt->execute([':email' => $email, ':id' => $id]);
         $result = $stmt->fetchAll();
@@ -141,7 +141,7 @@ class TicketReservation extends dbconnection
             return;
         } else {
             $reservation_id = uniqid();
-            $query =  "INSERT INTO  churchill_event_tickets.reserved_tickets(id,email,event_id,vip_ticket_quantity,regular_ticket_quantity) 
+            $query =  "INSERT INTO  churchill_event_tickets.reserved_tickets(id,user_id,event_id,vip_ticket_quantity,regular_ticket_quantity) 
          VALUES ('$reservation_id','$email','$id','$vip_quantity','$regular_quantity') ";
             try {
                 $this->connectDb()->exec($query);

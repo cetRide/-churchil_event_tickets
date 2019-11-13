@@ -37,5 +37,9 @@ if (isset($_POST['signup'])) {
     $signup = new signup();
     $signup->setEmail($email);
     $signup->setPassword($password);
+    setcookie("Email", "", time() - 60, "/", "", 0);
+    setcookie("Password", "", time() - 60, "/", "", 0);
+    setcookie("Email", $signup->getEmail(), time() + (60), "/");
+    setcookie("Password", $signup->getPassword(), time() + (60), "/");
     $signup->register_customer($signup->getEmail(), $signup->getPassword());
 }

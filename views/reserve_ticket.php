@@ -93,8 +93,8 @@
                                              <option value="5">5</option>
                                          </select>
                                      </div>
-                                     <input type="email" id="defaultRegisterFormEmail" class="form-control mb-2" name="email" placeholder="Your email address" required>
-                                     <button class="btn btn-danger text-center text-capitalize" type="submit" name="reserve_ticket" style="border-radius: 15px;"> Reserve ticket</button>
+                                     <input type="email" id="defaultRegisterFormEmail" class="form-control mb-2" name="email" placeholder="Your email address" value="<?php if (isset($_COOKIE['Email'])) echo $_COOKIE['Email']; ?>" required>
+                                     <button class=" btn btn-danger text-center text-capitalize" type="submit" name="reserve_ticket" style="border-radius: 15px;"> Reserve ticket</button>
 
                              </form>
                          </div>

@@ -60,7 +60,7 @@ if (!isset($_SESSION['email'])) {
                                                         </button>
                                                     </div>
                                                     <div>
-                                                        <form action="../controllers/handle_event.php" method="POST">
+                                                        <form action="../controllers/handle_event.php" method="POST" enctype="multipart/form-data">
                                                             <input type="hidden" name="id" value="<?php echo $event['event_id'] ?>">
                                                             <div class="mb-2">
                                                                 <label for="name">Event Name</label>

@@ -22,46 +22,50 @@ class register extends dbconnection
 
     public function register_customer($email, $password)
     {
+        session_start();
+        $error = null;
+
         if (empty($email)) {
-            echo '<script> alert(\'Email address field is empty.\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
-            return;
-        }
-     
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo '<script> alert(\'Invalid email address.\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Email address field is empty";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         }
 
-        if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
-            echo '<script> alert(\'Invalid user name.\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Invalid email address";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         }
 
         if (strlen($password) <= '8') {
-            echo '<script> alert(\'Your Password Must Contain At Least 8 Characters!\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Your Password Must Contain At Least 8 Characters!";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         } elseif (!preg_match("#[0-9]+#", $password)) {
-            echo '<script> alert(\'Your Password Must Contain At Least 1 Number!\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Your Password Must Contain At Least 1 Number!";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         } elseif (!preg_match("#[A-Z]+#", $password)) {
-            echo '<script> alert(\'Your Password Must Contain At Least 1 Capital Letter!\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Your Password Must Contain At Least 1 Capital Letter!";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         } elseif (!preg_match("#[a-z]+#", $password)) {
-            echo '<script> alert(\'Your Password Must Contain At Least 1 Lowercase Letter!\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Your Password Must Contain At Least 1 Capital Letter!";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         }
 
         // check if email address exists
         if ($this->checkEmailIfExists($email) == true) {
-            echo '<script> alert(\'Email address already used.Use another email address.\')</script>';
-            echo '<script> window.open(\'../index.php\',\'_self\')</script>';
+            $error = "Email address already used.Use another email address.";
+            $_SESSION['errors'] = $error;
+            header('Location: ../views/admin_sign_up.php');
             return;
         }
 

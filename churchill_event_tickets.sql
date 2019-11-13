@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2019 at 11:50 AM
+-- Generation Time: Nov 13, 2019 at 08:08 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -51,7 +51,7 @@ INSERT INTO `admin_accounts` (`account_id`, `email`, `password`, `created_at`) V
 CREATE TABLE `events` (
   `event_id` varchar(256) NOT NULL,
   `name` varchar(256) NOT NULL,
-  `description` varchar(256) NOT NULL,
+  `description` text NOT NULL,
   `location` varchar(256) NOT NULL,
   `banner` varchar(256) DEFAULT NULL,
   `time` datetime NOT NULL,
@@ -61,6 +61,14 @@ CREATE TABLE `events` (
   `regular_price` varchar(256) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `name`, `description`, `location`, `banner`, `time`, `vip_allocation`, `regular_allocation`, `vip_price`, `regular_price`, `created_at`) VALUES
+('5dcc52cc8367e', 'Churchill Show Mariakani', 'We are hereby invited to attend this event', 'Mariakani', '5dcc52cc807378.97711374.jpg', '2019-11-15 21:11:00', '500', '1000', '3500', '1500', '2019-11-13 19:00:28'),
+('5dcc537d5f815', 'Churchill Show Makunga', 'Watu wa ingo vipi', 'Makunga', '5dcc537d573d94.33549728.jpg', '2019-11-16 21:11:00', '500', '1000', '3500', '1500', '2019-11-13 19:03:25');
 
 -- --------------------------------------------------------
 

@@ -23,7 +23,7 @@ class signin extends dbconnection
                 $verifiedPass = password_verify($password, $row['password']);
                 //password do not match
                 if (!$verifiedPass) {
-                    echo '<script> alert(\'Invalid Credentials.\')</script>';
+                    echo '<script> alert(\'Incorrect password.\')</script>';
                     echo '<script> window.open(\'../\',\'_self\')</script>';
                 } else {
                     try {

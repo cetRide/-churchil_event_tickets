@@ -75,10 +75,23 @@ class manageEvents extends dbconnection
 
     public function deleteEvent($id)
     {
-        $query = "DELETE FROM churchill_event_tickets.events WHERE `event_id` = ? ";
-        $pre = $this->connectDb()->prepare($query);
-        $pre->execute([$id]);
-        header('Location: ../views/events.php');
+        try {
+            $this->connectDb()->beginTransaction();
+            $query = "DELETE FROM churchill_event_tickets.reserved_tickets WHERE `event_id` = ? ";
+            $pre = $this->connectDb()->prepare($query);
+            $pre->execute([$id]);
+
+            $query = "DELETE FROM churchill_event_tickets.events WHERE `event_id` = ? ";
+            $pre = $this->connectDb()->prepare($query);
+            $pre->execute([$id]);
+            echo '<script> alert(\'Event deleted successfully\')</script>';
+            echo '<script> window.open(\'../views/events.php\',\'_self\')</script>';
+            // header('Location: ../views/events.php');
+            $this->connectDb()->commit();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            $this->connectDb()->rollBack();
+        }
     }
 
     public function updateEvents(
@@ -95,7 +108,8 @@ class manageEvents extends dbconnection
     ) {
         $query = "UPDATE churchill_event_tickets.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=?, `banner`=? WHERE `event_id` = ?";
         $pre = $this->connectDb()->prepare($query);
-        $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);        header('Location: ../views/events.php');
+        $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);
+        header('Location: ../views/events.php');
         header('Location: ../views/events.php');
     }
     public function submitEvent(
@@ -146,12 +160,13 @@ class manageEvents extends dbconnection
             header('Location: ../views/addEvent.php');
             return;
         }
-
+      
         $id = uniqid();
         $createEvent = "INSERT INTO  churchill_event_tickets.events(`event_id`, `name`, `description`, `location`, `banner`, `time`, `vip_allocation`, `regular_allocation`, `vip_price`, `regular_price`
 )  VALUES ('$id', '$name','$description','$location','$bunner','$date','$vip_quantity','$regular_quantity','$vip_price','$regular_price'
 ) ";
         try {
+            $this->connectDb()->quote($description);
             $this->connectDb()->exec($createEvent);
             $messages = 'Event created successfully';
             $_SESSION['messages'] = $messages;

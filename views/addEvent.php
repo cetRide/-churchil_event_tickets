@@ -19,7 +19,7 @@ if (!(isset($_SESSION['email']))) {
                     <p class="h4">
                         <span class="text-danger">1</span>. Event Details
                     </p>
-                    <form action="../controllers/handle_event.php" method="POST">
+                    <form action="../controllers/handle_event.php" method="POST" enctype="multipart/form-data">
 
                         <?php
                             if (isset($_SESSION['errors']) && $_SESSION['errors'] != null) {
@@ -39,19 +39,19 @@ if (!(isset($_SESSION['email']))) {
                             ?>
                         <div class="mb-2">
                             <label for="name">Event Name</label>
-                            <input class="form-control form-control-lg" type="text" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>" required>
+                            <input class="form-control form-control-lg" type="text" name="name" value="<?php if (isset($_COOKIE['Name'])) echo $_COOKIE['Name']; ?>" required>
                         </div>
                         <div class="mb-2">
                             <label for="venue">Location/Venue</label>
-                            <input class="form-control form-control-lg" type="text" name="location" value="<?php echo isset($_POST['location']) ? $_POST['location'] : ''; ?>" required>
+                            <input class="form-control form-control-lg" type="text" name="location" value="<?php if (isset($_COOKIE['Location'])) echo $_COOKIE['Location']; ?>" required>
                         </div>
                         <div class="d-inline-block mb-2">
                             <label for="starts">Event date & Time</label>
-                            <input class="form-control form-control-lg" type="text" id="picker" onkeydown="return false" name="date" value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" required>
+                            <input class="form-control form-control-lg" type="text" id="picker" onkeydown="return false" name="date" value="<?php if (isset($_COOKIE['Date'])) echo $_COOKIE['Date']; ?>" required>
                         </div>
                         <div class="form-group mb-2">
                             <label for="exampleFormControlTextarea3">Event Description</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="event_description" value="<?php echo isset($_POST['event_description']) ? $_POST['event_description'] : ''; ?>" required></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="event_description" vvalue="<?php if (isset($_COOKIE['Description'])) echo $_COOKIE['Description']; ?>" required></textarea>
                         </div>
                         <label for="banner">Event Banner</label>
 
@@ -77,18 +77,18 @@ if (!(isset($_SESSION['email']))) {
                                 </thead>
                                 <tr>
                                     <td>VIP</td>
-                                    <td class="p-4"> <input class="form-control form-control-sm" type="text" name="vip_quantity" value="<?php echo isset($_POST['vip_quantity']) ? $_POST['vip_quantity'] : ''; ?>" required>
+                                    <td class="p-4"> <input class="form-control form-control-sm" type="text" name="vip_quantity" value="<?php if (isset($_COOKIE['Vip_quantity'])) echo $_COOKIE['Vip_quantity']; ?>" required>
                                     </td>
-                                    <td><input class="form-control form-control-sm" type="text" name="vip_price" value="<?php echo isset($_POST['vip_price']) ? $_POST['vip_price'] : ''; ?>" required>
+                                    <td><input class="form-control form-control-sm" type="text" name="vip_price" value="<?php if (isset($_COOKIE['Vip_price'])) echo $_COOKIE['Vip_price']; ?>" required>
                                     </td>
 
                                 </tr>
                                 <tr></tr>
                                 <tr>
                                     <td>Regular</td>
-                                    <td class="p-3"> <input class="form-control form-control-sm" type="text" name="regular_quantity" value="<?php echo isset($_POST['regular_quantity']) ? $_POST['regular_quantity'] : ''; ?>" required>
+                                    <td class="p-3"> <input class="form-control form-control-sm" type="text" name="regular_quantity" value="<?php if (isset($_COOKIE['Regular_quantity'])) echo $_COOKIE['Regular_quantity']; ?>" required>
                                     </td>
-                                    <td> <input class="form-control form-control-sm" type="text" name="regular_price" value="<?php echo isset($_POST['regular_price']) ? $_POST['regular_price'] : ''; ?>" required>
+                                    <td> <input class="form-control form-control-sm" type="text" name="regular_price" value="<?php if (isset($_COOKIE['Regular_price'])) echo $_COOKIE['Regular_price']; ?>" required>
                                     </td>
                                 </tr>
                             </TABLE>
@@ -108,4 +108,3 @@ if (!(isset($_SESSION['email']))) {
     </html>
 
 <?php } ?>
-

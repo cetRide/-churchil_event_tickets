@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once('../models/manage_events.php');
@@ -99,55 +98,78 @@ if (isset($_POST['add_event'])) {
     $bunnerSize = $_FILES['file']['size'];
     $bunnerError = $_FILES['file']['error'];
 
-    // get file extension
+    $newEvent = new handleEvent();
+    $newEvent->setName($name);
+    $newEvent->setLocation($location);
+    $newEvent->setDate($date);
+    $newEvent->setDescription($description);
+    $newEvent->setVip_price($vip_price);
+    $newEvent->setVip_quantity($vip_quantity);
+    $newEvent->setRegular_price($regular_price);
+    $newEvent->setRegular_quantity($regular_quantity);
+
+    //setCookies
+    setcookie("Name", $newEvent->getName(), time() + (60), "/");
+    setcookie("Location", $newEvent->getLocation(), time() + (60), "/");
+    setcookie("Date", $newEvent->getDate(), time() + (60), "/");
+    setcookie("Description", $newEvent->getDescription(), time() + (60), "/");
+    setcookie("Vip_price", $newEvent->getVip_price(), time() + (60), "/");
+    setcookie("Vip_quantity", $newEvent->getVip_quantity(), time() + (60), "/");
+    setcookie("Regular_price", $newEvent->getRegular_price(), time() + (60), "/");
+    setcookie("Regular_quantity", $newEvent->getRegular_quantity(), time() + (60), "/");
+
+
     $bunnerExt = explode('.', $bunnerName);
     $formatedExt = strtolower(end($bunnerExt));
 
     $allowed = array('jpg', 'png', 'jpeg');
+    $fileName = null;
 
-    if (in_array($formatedExt, $allowed)) {
-        if ($bunnerError === 0) {
-            // if($bunnerSize > 1000000){
-            // upload 
-            $fileName = uniqid('', true) . "." . $formatedExt;
-            $destination = '../images/' . $fileName;
-            move_uploaded_file($bunnerTmpName, $destination);
+    if (empty($bunnerName)) {
+        $newEvent->submitEvent(
+            $newEvent->getName(),
+            $newEvent->getLocation(),
+            $newEvent->getDate(),
+            $newEvent->getDescription(),
+            $newEvent->getVip_quantity(),
+            $newEvent->getRegular_quantity(),
+            $newEvent->getVip_price(),
+            $newEvent->getRegular_price(),
+            $fileName
+        );
+    } else {
 
+        if (in_array($formatedExt, $allowed)) {
+            if ($bunnerError === 0) {
+                $fileName = uniqid('', true) . "." . $formatedExt;
+                $destination = '../images/' . $fileName;
+                move_uploaded_file($bunnerTmpName, $destination);
 
-            $newEvent = new handleEvent();
-            $newEvent->setName($name);
-            $newEvent->setLocation($location);
-            $newEvent->setDate($date);
-            $newEvent->setDescription($description);
-            $newEvent->setVip_price($vip_price);
-            $newEvent->setVip_quantity($vip_quantity);
-            $newEvent->setRegular_price($regular_price);
-            $newEvent->setRegular_quantity($regular_quantity);
+                $newEvent->submitEvent(
 
-            $newEvent->submitEvent(
-
-                $newEvent->getName(),
-                $newEvent->getLocation(),
-                $newEvent->getDate(),
-                $newEvent->getDescription(),
-                $newEvent->getVip_quantity(),
-                $newEvent->getRegular_quantity(),
-                $newEvent->getVip_price(),
-                $newEvent->getRegular_price(),
-                $fileName
-            );
+                    $newEvent->getName(),
+                    $newEvent->getLocation(),
+                    $newEvent->getDate(),
+                    $newEvent->getDescription(),
+                    $newEvent->getVip_quantity(),
+                    $newEvent->getRegular_quantity(),
+                    $newEvent->getVip_price(),
+                    $newEvent->getRegular_price(),
+                    $fileName
+                );
+            } else {
+                $error = "Error occured during file upload";
+                $_SESSION['errors'] = $error;
+                header('Location: ../views/addEvent.php');
+                return;
+            }
         } else {
-            $error = "Error occured during file upload";
+
+            $error = "The type of file Uploaded is not allowed, only images are allowed";
             $_SESSION['errors'] = $error;
             header('Location: ../views/addEvent.php');
             return;
         }
-    } else {
-
-        $error = "The type of file Uploaded is not allowed, only images are allowed";
-        $_SESSION['errors'] = $error;
-        header('Location: ../views/addEvent.php');
-        return;
     }
 }
 
@@ -163,58 +185,85 @@ if (isset($_POST['edit_event'])) {
     $regular_quantity = $_POST['regular_quantity'];
     $vip_price = $_POST['vip_price'];
     $regular_price = $_POST['regular_price'];
-    $id = $_POST['id'];
     $bunner = $_FILES['file'];
     $bunnerName = $_FILES['file']['name'];
     $bunnerTmpName = $_FILES['file']['tmp_name'];
     $bunnerSize = $_FILES['file']['size'];
     $bunnerError = $_FILES['file']['error'];
 
-    // get file extension
+    $newEvent = new handleEvent();
+    $newEvent->setName($name);
+    $newEvent->setLocation($location);
+    $newEvent->setDate($date);
+    $newEvent->setDescription($description);
+    $newEvent->setVip_price($vip_price);
+    $newEvent->setVip_quantity($vip_quantity);
+    $newEvent->setRegular_price($regular_price);
+    $newEvent->setRegular_quantity($regular_quantity);
+
+    //setCookies
+    setcookie("Name", $newEvent->getName(), time() + (60), "/");
+    setcookie("Location", $newEvent->getLocation(), time() + (60), "/");
+    setcookie("Date", $newEvent->getDate(), time() + (60), "/");
+    setcookie("Description", $newEvent->getDescription(), time() + (60), "/");
+    setcookie("Vip_price", $newEvent->getVip_price(), time() + (60), "/");
+    setcookie("Vip_quantity", $newEvent->getVip_quantity(), time() + (60), "/");
+    setcookie("Regular_price", $newEvent->getRegular_price(), time() + (60), "/");
+    setcookie("Regular_quantity", $newEvent->getRegular_quantity(), time() + (60), "/");
+
+
     $bunnerExt = explode('.', $bunnerName);
     $formatedExt = strtolower(end($bunnerExt));
 
     $allowed = array('jpg', 'png', 'jpeg');
-    if (in_array($formatedExt, $allowed)) {
-        if ($bunnerError === 0) {
+    $fileName = null;
 
-            $fileName = uniqid('', true) . "." . $formatedExt;
-            $destination = '../images/' . $fileName;
-            move_uploaded_file($bunnerTmpName, $destination);
-            $newEvent = new handleEvent();
-            $newEvent->setName($name);
-            $newEvent->setLocation($location);
-            $newEvent->setDate($date);
-            $newEvent->setDescription($description);
-            $newEvent->setVip_price($vip_price);
-            $newEvent->setVip_quantity($vip_quantity);
-            $newEvent->setRegular_price($regular_price);
-            $newEvent->setRegular_quantity($regular_quantity);
+    if (empty($bunnerName)) {
+        $newEvent->updateEvents(
+            $id,
+            $newEvent->getName(),
+            $newEvent->getLocation(),
+            $newEvent->getDate(),
+            $newEvent->getDescription(),
+            $newEvent->getVip_quantity(),
+            $newEvent->getRegular_quantity(),
+            $newEvent->getVip_price(),
+            $newEvent->getRegular_price(),
+            $fileName
+        );
+    } else {
 
-            $newEvent->updateEvents(
-                $id,
-                $newEvent->getName(),
-                $newEvent->getLocation(),
-                $newEvent->getDate(),
-                $newEvent->getDescription(),
-                $newEvent->getVip_quantity(),
-                $newEvent->getRegular_quantity(),
-                $newEvent->getVip_price(),
-                $newEvent->getRegular_price(),
-                $fileName
-            );
+        if (in_array($formatedExt, $allowed)) {
+            if ($bunnerError === 0) {
+                $fileName = uniqid('', true) . "." . $formatedExt;
+                $destination = '../images/' . $fileName;
+                move_uploaded_file($bunnerTmpName, $destination);
+
+                $newEvent->updateEvents(
+                    $id,
+                    $newEvent->getName(),
+                    $newEvent->getLocation(),
+                    $newEvent->getDate(),
+                    $newEvent->getDescription(),
+                    $newEvent->getVip_quantity(),
+                    $newEvent->getRegular_quantity(),
+                    $newEvent->getVip_price(),
+                    $newEvent->getRegular_price(),
+                    $fileName
+                );
+            } else {
+                $error = "Error occured during file upload";
+                $_SESSION['errors'] = $error;
+                header('Location: ../views/addEvent.php');
+                return;
+            }
         } else {
-            $error = "Error occured during file upload";
+
+            $error = "The type of file Uploaded is not allowed, only images are allowed";
             $_SESSION['errors'] = $error;
             header('Location: ../views/addEvent.php');
             return;
         }
-    } else {
-
-        $error = "The type of file Uploaded is not allowed, only images are allowed";
-        $_SESSION['errors'] = $error;
-        header('Location: ../views/addEvent.php');
-        return;
     }
 }
 
@@ -224,4 +273,3 @@ if (isset($_GET['del'])) {
     $viewEvent  = new manageEvents();
     $viewEvent->deleteEvent($id);
 }
-?>

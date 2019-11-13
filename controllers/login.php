@@ -33,5 +33,9 @@ if (isset($_POST['login'])) {
    $login = new login();
    $login->setEmail($email);
    $login->setPassword($password);
+   setcookie("Email", "", time() - 60, "/", "", 0);
+   setcookie("Password", "", time() - 60, "/", "", 0);
+   setcookie("Email", $login->getEmail(), time() + (60), "/");
+   setcookie("Password", $login->getPassword(), time() + (60), "/");
    $login->authenticate($login->getEmail(), $login->getPassword());
 }

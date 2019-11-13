@@ -13,7 +13,7 @@
     <?php include('utils/navbar.php') ?>
     <header>
         <div class="overlay"></div>
-        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <video playsinline autoplay muted loop>
             <source src="videos/a.mp4" type="video/mp4">
         </video>
         <div class="container h-100">
@@ -84,8 +84,8 @@
                                 <div class="card z-depth-5 hoverable">
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-md-5 mb-1 view overlay zoom">
-                                            <!-- <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 450px; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner..."> -->
-                                            <img src="https://www.churchill.co.ke/Tickets/assets/img/backgrounds/bg1.jpg" alt="" class="card-img-top">
+                                            <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 450px; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
+                                            <!-- <img src="https://www.churchill.co.ke/Tickets/assets/img/backgrounds/bg1.jpg" alt="" class="card-img-top"> -->
                                         </div>
                                         <div class="col p-3">
                                             <div>

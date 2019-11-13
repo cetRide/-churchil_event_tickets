@@ -6,7 +6,7 @@
     $home_link = "../index.php";
     $add_event_link = "../views/addEvent.php";
     $modify_event_link = "../views/events.php";
-    if ($_SERVER['REQUEST_URI'] == "/churchil_event_tickets/index.php") {
+    if (($_SERVER['REQUEST_URI'] == "/churchil_event_tickets/index.php") || ($_SERVER['REQUEST_URI'] == "/churchil_event_tickets/")) {
         $action = "controllers/login.php";
         $logout = "controllers/logout.php";
         $home_link = "/churchil_event_tickets/index.php";
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href=<?php echo  $home_link; ?>>
-               Churchill Show
+                Churchill Show
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -63,9 +63,9 @@
         <div class="d-none">
             <form id="form" action=<?php echo $action; ?> method="POST">
                 <!-- Email -->
-                <input type="email" id="defaultLoginFormEmail" name="email" class="form-control form-control-sm mb-4" placeholder="E-mail">
+                <input type="email" id="defaultLoginFormEmail" name="email" value="<?php if (isset($_COOKIE['Email'])) echo $_COOKIE['Email']; ?>" class="form-control form-control-sm mb-4" placeholder="E-mail">
                 <!-- Password -->
-                <input type="password" id="defaultLoginFormPassword" name="password" class="form-control form-control-sm mb-4" placeholder="Password">
+                <input type="password" id="defaultLoginFormPassword" name="password" value="<?php if (isset($_COOKIE['Password'])) echo $_COOKIE['Password']; ?>" class="form-control form-control-sm mb-4" placeholder="Password">
                 <button class="my-1 text-capitalize btn btn-danger btn-block mb-1 py-2" name="login" type="submit">Sign
                     In</button>
             </form>
