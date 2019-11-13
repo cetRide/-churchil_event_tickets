@@ -56,7 +56,7 @@ if (!(isset($_SESSION['email']))) {
                         <label for="banner">Event Banner</label>
 
                         <div class="col-md-4 border bg-white text-center p-1" style="border-radius:15px;">
-                            <i class="fas fa-camera text-primary" style="font-size: 45px; cursor: pointer;"></i>
+                            <i class="fas fa-camera text-danger" style="font-size: 45px; cursor: pointer;"></i>
                             <h5>Add Event Image</h5>
                             <small>Choose compelling image that brings your event to life!!</small>
                             <input type="file" name="file" />
@@ -68,7 +68,7 @@ if (!(isset($_SESSION['email']))) {
                         </p>
                         <div class="border p-3" style="border-radius: 15px;">
                             <TABLE>
-                                <thead class="text-primary">
+                                <thead class="text-danger">
                                     <tr>
                                         <th scope="col" class="text-center my-2">Ticket Type</th>
                                         <th scope="col" class="text-center my-2">Quantity available</th>
@@ -95,7 +95,7 @@ if (!(isset($_SESSION['email']))) {
                         </div>
                         <div class="my-4">
                             <p>Nice job! You're almost done.</p>
-                            <button class="btn btn-primary p-3" type="submit" name="add_event" style="border-radius: 25px;"> Make Your Event Live.</button>
+                            <button class="btn btn-danger p-3 text-capitalize" type="submit" name="add_event" style="border-radius: 25px;"> Make Your Event Live.</button>
                         </div>
                     </form>
                 </div>
@@ -108,3 +108,4 @@ if (!(isset($_SESSION['email']))) {
     </html>
 
 <?php } ?>
+

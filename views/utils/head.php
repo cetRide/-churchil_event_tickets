@@ -10,7 +10,7 @@
   <link href="mdb/css/mdb.min.css" rel="stylesheet">
   <link href="mdb/css/style.min.css" rel="stylesheet">
   <link rel="stylesheet" href="mdb/css/bootstrap-datetimepicker.min.css">
-  <link rel="stylesheet" href="utils/custom.css">
-  <link rel="stylesheet" href="utils/wtf.css">
+  <link rel="stylesheet" href="customcss/custom.css">
+  <link rel="stylesheet" href="customcss/wtf.css">
   <link rel="shortcut icon" type="image/png" href="../images/logo.png" />
 </head>

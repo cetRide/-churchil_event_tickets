@@ -51,7 +51,7 @@ if (!isset($_SESSION['email'])) {
                                             <div class="modal-content p-5">
                                                 <div class="row d-flex justify-content-between">
                                                     <div>
-                                                        <h5 class="text-primary text-center font-weight-bolder">Modify Event</h5>
+                                                        <h5 class="text-danger text-center font-weight-bolder">Modify Event</h5>
                                                     </div>
 
                                                     <div>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['email'])) {
                                                             <label for="banner">Event Banner</label>
                                                             <div>
                                                                 <div class="upload-btn-wrapper border bg-white text-center p-5">
-                                                                    <i class="fas fa-camera text-primary" style="font-size: 45px; cursor: pointer;"></i>
+                                                                    <i class="fas fa-camera text-danger" style="font-size: 45px; cursor: pointer;"></i>
                                                                     <h5>Add Event Image</h5>
                                                                     <small>Choose compelling image that brings your event to life!!</small>
                                                                     <input type="file" name="file" />
@@ -109,7 +109,7 @@ if (!isset($_SESSION['email'])) {
                                                             </div>
                                                             <div class="my-4">
                                                                 <p>Nice job! You're almost done.</p>
-                                                                <button class="btn btn-primary p-3" type="submit" name="edit_event" style="border-radius: 25px;"> Make Your Event Live.</button>
+                                                                <button class="btn btn-danger p-3 text-capitalize" type="submit" name="edit_event" style="border-radius: 25px;"> Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
