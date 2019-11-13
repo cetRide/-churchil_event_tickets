@@ -185,6 +185,8 @@ if (isset($_POST['edit_event'])) {
     $regular_quantity = $_POST['regular_quantity'];
     $vip_price = $_POST['vip_price'];
     $regular_price = $_POST['regular_price'];
+    $id = $_POST['id'];
+
     $bunner = $_FILES['file'];
     $bunnerName = $_FILES['file']['name'];
     $bunnerTmpName = $_FILES['file']['tmp_name'];
@@ -200,17 +202,6 @@ if (isset($_POST['edit_event'])) {
     $newEvent->setVip_quantity($vip_quantity);
     $newEvent->setRegular_price($regular_price);
     $newEvent->setRegular_quantity($regular_quantity);
-
-    //setCookies
-    setcookie("Name", $newEvent->getName(), time() + (60), "/");
-    setcookie("Location", $newEvent->getLocation(), time() + (60), "/");
-    setcookie("Date", $newEvent->getDate(), time() + (60), "/");
-    setcookie("Description", $newEvent->getDescription(), time() + (60), "/");
-    setcookie("Vip_price", $newEvent->getVip_price(), time() + (60), "/");
-    setcookie("Vip_quantity", $newEvent->getVip_quantity(), time() + (60), "/");
-    setcookie("Regular_price", $newEvent->getRegular_price(), time() + (60), "/");
-    setcookie("Regular_quantity", $newEvent->getRegular_quantity(), time() + (60), "/");
-
 
     $bunnerExt = explode('.', $bunnerName);
     $formatedExt = strtolower(end($bunnerExt));
