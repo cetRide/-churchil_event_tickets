@@ -162,10 +162,17 @@ class TicketReservation extends dbconnection
          VALUES ('$reservation_id','$email','$id','$vip_quantity','$regular_quantity') ";
             try {
                 $this->connectDb()->exec($query);
-                $this->sendMail($id, $email, $vip_quantity, $regular_quantity);
-                header('Location: ../index.php');
-                echo '<script> alert(\'Ticket Reserved Successfully.Check your mail for more info.Thank you\')</script>';
-                echo '<script> window.open(\'../index.php\')</script>';
+                if( $this->sendMail($id, $email, $vip_quantity, $regular_quantity)){
+
+                    echo '<script> alert(\'Ticket Reserved Successfully.Check your mail for more info.Thank you\')</script>';
+                    // header('Location: ../index.php');
+                    echo '<script> window.open(\'../index.php\')</script>';
+                }else{
+                    echo '<script> alert(\'Ticket not reserved, try again\')</script>';
+                    header('Location: ../index.php');
+                }
+               
+               
             } catch (Exception $e) {
                 echo "ERROR: " . $e->getMessage();
             }
