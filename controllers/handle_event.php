@@ -87,7 +87,8 @@ if (isset($_POST['add_event'])) {
     $name = $_POST['name'];
     $location = $_POST['location'];
     $date = $_POST['date'];
-    $description = $_POST['event_description'];
+    // $description = $_POST['event_description'];
+    $description = filter_var($_POST['event_description'], FILTER_SANITIZE_STRING);
     $vip_quantity = $_POST['vip_quantity'];
     $regular_quantity = $_POST['regular_quantity'];
     $vip_price = $_POST['vip_price'];
@@ -180,7 +181,8 @@ if (isset($_POST['edit_event'])) {
     $name = $_POST['name'];
     $location = $_POST['location'];
     $date = $_POST['date'];
-    $description = $_POST['event_description'];
+    // $description = $_POST['event_description'];
+    $description = filter_var($_POST['event_description'], FILTER_SANITIZE_STRING);
     $vip_quantity = $_POST['vip_quantity'];
     $regular_quantity = $_POST['regular_quantity'];
     $vip_price = $_POST['vip_price'];
