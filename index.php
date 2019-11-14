@@ -3,11 +3,7 @@
 <?php include('utils/head.php') ?>
 <?php require_once('models/manage_events.php'); ?>
 
-<style>
-    .reserve-btn {
-        transform: skew(-20deg);
-    }
-</style>
+
 
 <body style="background-color: whitesmoke">
     <?php include('utils/navbar.php') ?>
@@ -73,6 +69,11 @@
                     <?php
                         foreach ($events as $event) {
                             $slide_active = null;
+
+                            $MessageW = wordwrap($event['description'], 60, "\n", true);
+                            $MessageW = htmlentities($MessageW);
+                            $MessageW = nl2br($MessageW);
+                            $capsDesc = ucfirst($MessageW);
                             if ($active == $event) {
                                 $slide_active = "active";
                             }
@@ -80,21 +81,20 @@
 
                             ?>
                         <div class="carousel-item <?php echo $slide_active; ?>">
-                            <div class="">
+                            <!-- <div class="">
                                 <div class="card z-depth-5 hoverable">
-                                    <div class="row d-flex justify-content-end">
-                                        <div class="col-md-5 mb-1 view overlay zoom">
-                                            <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 450px; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
-                                            <!-- <img src="https://www.churchill.co.ke/Tickets/assets/img/backgrounds/bg1.jpg" alt="" class="card-img-top"> -->
+                                    <div class="row d-flex justify-content-between border">
+                                        <div class="col-sm-4 mb-1 view overlay border zoom">
+                                            <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 100%; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
                                         </div>
-                                        <div class="col p-3">
+                                        <div class="col-md p-3">
                                             <div>
                                                 <p class="h4 text-center my-3">Event description</p>
                                                 <div class="col-md-8 ml-auto mr-auto border p-4" style="border-radius: 15px;">
                                                     <p><?php echo $event['description'] = ucfirst($event['description']); ?></p>
                                                 </div>
                                             </div>
-                                            <div class="col-md-7 ml-auto mr-auto p-4 row d-flex justify-content-between" style="border-radius: 15px;">
+                                            <div class="col ml-auto mr-auto p-4 row d-flex justify-content-between" style="border-radius: 15px;">
                                                 <div class="d-inline-block ">
                                                     <p class="h3">
                                                         Regular
@@ -135,8 +135,58 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> -->
+                            <div id="container">
+                                <!-- Startevent details -->
+                                <div class="event-details p-3">
+                                    <!-- 	event Name -->
+                                    <h1 class="text-danger mb-2 text-center"><?php echo $event['name']; ?></h1>
+                                    <hr>
+                                    <!-- The most important information about the event -->
+                                    <div class="information">
+                                        <p><i class="fas fa-map-marker-alt mr-4"></i><?php echo $event['location']; ?></p>
+                                        <p><i class=" far fa-clock mr-4"></i><?php echo $event['time']; ?></p>
+                                        <div class="d-inline-block mr-3">
+                                            <p class="font-weight-bold">VIP</p>
+                                            <p>@Kes <?php echo $event['vip_price']; ?></p>
+                                        </div>
+                                        <div class="d-inline-block">
+                                            <p class="font-weight-bold">Regular</p>
+                                            <p>@Kes <?php echo $event['regular_price']; ?></p>
+                                        </div>
+                                        <div class="">
+                                            <form action="controllers/reservation.php" method="POST">
+                                                <input type="hidden" name="event_id" value="<?php echo $event['event_id']; ?>">
+                                                <input type="hidden" name="event_name" value="<?php echo $event['name']; ?>">
+                                                <input type="hidden" name="regular_price" value="<?php echo $event['regular_price']; ?>">
+                                                <input type="hidden" name="vip_price" value="<?php echo $event['vip_price'] ?>">
+                                                <input type="hidden" name="location" value="<?php echo $event['location']; ?>">
+                                                <input type="hidden" name="date" value="<?php echo $event['time'] ?>">
+                                                <button type="submit" name="reserve" class="btn btn-danger reserve-btn ">Buy Ticket</button>
+                                            </form>
 
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="event-image">
+
+                                    <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
+
+                                    <!-- 	event Information-->
+                                    <div class="info">
+                                        <h2 class="text-danger">Event Description</h2>
+                                        <p class="p-2">
+                                            <?php echo $capsDesc; ?>
+                                        </p>
+                                    </div>
+                                    <em><small class="text-muted">hover banner<i class="ml-3 text-danger fas fa-angle-right"></i></small></em>
+
+                                </div>
+                                <!--  End event image  -->
+                            </div>
                         </div>
                     <?php
 

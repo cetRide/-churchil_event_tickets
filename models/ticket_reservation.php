@@ -1,5 +1,6 @@
 <?php
 require_once('database_connection.php');
+require_once('manage_events.php');
 require_once('../vendor/autoload.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -111,6 +112,22 @@ class TicketReservation extends dbconnection
     {
         session_start();
         $error = null;
+        // $remTickets = new manageEvents();
+        // $rem = $remTickets->remainingTickets($id);
+        // if ($vip_quantity > $rem[0]) {
+        //     $error = "Only $rem[0] vip tickets left";
+        //     $_SESSION['errors'] = $error;
+        //     header('Location: ../views/reserve_ticket.php');
+        //     return;
+        // }
+        // if ($regular_quantity > $rem[1]) {
+        //     $error = "Only $rem[1] regular tickets left";
+        //     $_SESSION['errors'] = $error;
+        //     header('Location: ../views/reserve_ticket.php');
+        //     return;
+        // }
+
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $error = "Invalid email address";
             $_SESSION['errors'] = $error;

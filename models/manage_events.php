@@ -34,7 +34,7 @@ class manageEvents extends dbconnection
         $pre = $this->connectDb()->prepare($query);
         $pre->execute([$id]);
         while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
-            $array_results = array($row['regular_allocation'], $row['vip_allocation']);
+            $array_results[] = array($row['regular_allocation'], $row['vip_allocation']);
         }
         return  $array_results;
     }
@@ -52,7 +52,7 @@ class manageEvents extends dbconnection
         }
         $allocation_tickets_no = $this->returnTicketAllocation($id);
 
-        $remVip =  $allocation_tickets_no[0] - $vip_total;
+        $remVip =  ($allocation_tickets_no[0] - $vip_total);
         $remRegular =  $allocation_tickets_no[1] - $regular_total;
         $remaining_tickets = array($remVip,  $remRegular);
         return $remaining_tickets;
@@ -137,12 +137,7 @@ class manageEvents extends dbconnection
             header('Location: ../views/addEvent.php');
             return;
         }
-        if (!preg_match("/^[a-zA-Z ]*$/", $location)) {
-            $error = "Invalid Location Name";
-            $_SESSION['errors'] = $error;
-            header('Location: ../views/addEvent.php');
-            return;
-        }
+        
         if ((!preg_match("#[0-9]+#", $vip_price)) || (!preg_match("#[0-9]+#", $regular_price))) {
             $error = "Ticket price should be in digits";
             $_SESSION['errors'] = $error;
