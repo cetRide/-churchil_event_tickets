@@ -85,7 +85,7 @@ class handleEvent extends manageEvents
 //create event
 if (isset($_POST['add_event'])) {
     $name = $_POST['name'];
-    $location = $_POST['location'];
+    $location = filter_var($_POST['location'], FILTER_SANITIZE_STRING);
     $date = $_POST['date'];
     // $description = $_POST['event_description'];
     $description = filter_var($_POST['event_description'], FILTER_SANITIZE_STRING);
