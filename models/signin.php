@@ -8,7 +8,7 @@ class signin extends dbconnection
 
     public function authenticate($email, $password)
     {
-        $search = "SELECT * FROM churchill_event_tickets.admin_accounts WHERE email= ?";
+        $search = "SELECT * FROM CdEgjh5AXU.admin_accounts WHERE email= ?";
         $pre = $this->connectDb()->prepare($search);
         $pre->execute([$email]);
         $rows = $pre->rowCount();

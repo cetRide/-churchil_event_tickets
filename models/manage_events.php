@@ -18,7 +18,7 @@ class manageEvents extends dbconnection
 
     public function checkEventNamefExists($name)
     {
-        $search = "SELECT * FROM churchill_event_tickets.events WHERE name= ?";
+        $search = "SELECT * FROM CdEgjh5AXU.events WHERE name= ?";
         $pre = $this->connectDb()->prepare($search);
         $pre->execute([$name]);
         $rows = $pre->rowCount();
@@ -30,7 +30,7 @@ class manageEvents extends dbconnection
     }
     public function returnTicketAllocation($id)
     {
-        $query = "SELECT `regular_allocation`, `vip_allocation` FROM churchill_event_tickets.events WHERE event_id= ? ";
+        $query = "SELECT `regular_allocation`, `vip_allocation` FROM CdEgjh5AXU.events WHERE event_id= ? ";
         $pre = $this->connectDb()->prepare($query);
         $pre->execute([$id]);
         while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
@@ -41,7 +41,7 @@ class manageEvents extends dbconnection
 
     public function remainingTickets($id)
     {
-        $query = "SELECT `vip_ticket_quantity`, `regular_ticket_quantity` FROM churchill_event_tickets.reserved_tickets WHERE event_id= ? ";
+        $query = "SELECT `vip_ticket_quantity`, `regular_ticket_quantity` FROM CdEgjh5AXU.reserved_tickets WHERE event_id= ? ";
         $pre = $this->connectDb()->prepare($query);
         $pre->execute([$id]);
         $vip_total = 0;
@@ -62,7 +62,7 @@ class manageEvents extends dbconnection
     {
 
         $events = array();
-        $query = "SELECT * FROM churchill_event_tickets.events";
+        $query = "SELECT * FROM CdEgjh5AXU.events";
         $pre = $this->connectDb()->prepare($query);
         $pre->execute();
         while ($row = $pre->fetch(PDO::FETCH_ASSOC)) {
@@ -77,11 +77,11 @@ class manageEvents extends dbconnection
     {
         try {
             $this->connectDb()->beginTransaction();
-            $query = "DELETE FROM churchill_event_tickets.reserved_tickets WHERE `event_id` = ? ";
+            $query = "DELETE FROM CdEgjh5AXU.reserved_tickets WHERE `event_id` = ? ";
             $pre = $this->connectDb()->prepare($query);
             $pre->execute([$id]);
 
-            $query = "DELETE FROM churchill_event_tickets.events WHERE `event_id` = ? ";
+            $query = "DELETE FROM CdEgjh5AXU.events WHERE `event_id` = ? ";
             $pre = $this->connectDb()->prepare($query);
             $pre->execute([$id]);
             echo '<script> alert(\'Event deleted successfully\')</script>';
@@ -106,7 +106,7 @@ class manageEvents extends dbconnection
         $regular_price,
         $banner
     ) {
-        $query = "UPDATE churchill_event_tickets.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=?, `banner`=? WHERE `event_id` = ?";
+        $query = "UPDATE CdEgjh5AXU.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=?, `banner`=? WHERE `event_id` = ?";
         $pre = $this->connectDb()->prepare($query);
         $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);
 
@@ -159,7 +159,7 @@ class manageEvents extends dbconnection
         }
 
         $id = uniqid();
-        $createEvent = "INSERT INTO  churchill_event_tickets.events(`event_id`, `name`, `description`, `location`, `banner`, `time`, `vip_allocation`, `regular_allocation`, `vip_price`, `regular_price`
+        $createEvent = "INSERT INTO  CdEgjh5AXU.events(`event_id`, `name`, `description`, `location`, `banner`, `time`, `vip_allocation`, `regular_allocation`, `vip_price`, `regular_price`
 )  VALUES ('$id', '$name','$description','$location','$bunner','$date','$vip_quantity','$regular_quantity','$vip_price','$regular_price'
 ) ";
         try {

@@ -12,16 +12,28 @@ class dbconnection
 	protected function connectDb()
 	{
 
-		$this->DB_SERVER = 'localhost';
-		$this->DB_USERNAME = 'root';
-		$this->DB_DATABASE = 'churchill_event_tickets';
-		$this->DB_PASSWORD = '';
+
+		// local
+		// $this->DB_SERVER = 'localhost';
+		// $this->DB_USERNAME = 'root';
+		// $this->DB_DATABASE = 'churchill_event_tickets';
+		// $this->DB_PASSWORD = '';
+
+
+		// production
+		$this->DB_SERVER = 'https://remotemysql.com';
+		$this->DB_USERNAME = 'CdEgjh5AXU';
+		$this->DB_DATABASE = 'CdEgjh5AXU';
+		$this->DB_PASSWORD = 'XoYnRHVRp2';
 		$this->DB_PORT = '3306';
 		$this->CHARSET = 'utf8mb4';
 
 		try {
-			$dsn = "mysql:host" . $this->DB_SERVER . "port" . $this->DB_PORT . ";dbname" . $this->DB_DATABASE . ";charset" . $this->CHARSET;
-			$db = new PDO($dsn, $this->DB_USERNAME, $this->DB_PASSWORD);
+			// $dsn = "mysql:host" . $this->DB_SERVER . "port" . $this->DB_PORT . ";dbname" . $this->DB_DATABASE . ";charset" . $this->CHARSET;
+			
+			
+			// $db = new PDO($dsn, $this->DB_USERNAME, $this->DB_PASSWORD);
+			$db = new PDO("mysql:host=remotemysql.com;port=3306;dbname=CdEgjh5AXU", "CdEgjh5AXU", "XoYnRHVRp2");
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $db;
 		} catch (PDOException $e) {
@@ -29,3 +41,8 @@ class dbconnection
 		}
 	}
 }
+
+
+// $conn = new dbconnection();
+
+// $conn->connectDb();

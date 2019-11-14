@@ -9,7 +9,7 @@ class register extends dbconnection
 
     public function checkEmailIfExists($email)
     {
-        $search = "SELECT * FROM churchill_event_tickets.admin_accounts WHERE email= ?";
+        $search = "SELECT * FROM CdEgjh5AXU.admin_accounts WHERE email= ?";
         $pre = $this->connectDb()->prepare($search);
         $pre->execute([$email]);
         $rows = $pre->rowCount();
@@ -71,7 +71,7 @@ class register extends dbconnection
 
         $id = uniqid();
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $insertuser = "INSERT INTO  churchill_event_tickets.admin_accounts(account_id, email, password)  VALUES ('$id','$email','$password_hash') ";
+        $insertuser = "INSERT INTO  CdEgjh5AXU.admin_accounts(account_id, email, password)  VALUES ('$id','$email','$password_hash') ";
         try {
             $this->connectDb()->exec($insertuser);
         } catch (Exception $e) {
