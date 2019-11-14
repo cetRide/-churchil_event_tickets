@@ -10,7 +10,7 @@
     <header>
         <div class="overlay"></div>
         <video playsinline autoplay muted loop>
-            <source src="videos/a.mp4" type="video/mp4">
+            <source src="videos/bg.mkv" type="video/mp4">
         </video>
         <div class="container h-100">
             <div class="d-flex h-100 text-center align-items-center">
@@ -77,12 +77,11 @@
                             if ($active == $event) {
                                 $slide_active = "active";
                             }
-                            // $remaining_ticket = $eventsObj->remainingTickets($event['event_id']);
 
                             ?>
                         <div class="carousel-item <?php echo $slide_active; ?>">
-                         
-                            <div class="container"id="container">
+
+                            <div class="col-md-9" id="container">
                                 <!-- Startevent details -->
                                 <div class="event-details p-3">
                                     <!-- 	event Name -->

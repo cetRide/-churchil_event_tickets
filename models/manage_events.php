@@ -52,7 +52,7 @@ class manageEvents extends dbconnection
         }
         $allocation_tickets_no = $this->returnTicketAllocation($id);
 
-        $remVip =  ($allocation_tickets_no[0] - $vip_total);
+        $remVip = ($allocation_tickets_no[0] - $vip_total);
         $remRegular =  $allocation_tickets_no[1] - $regular_total;
         $remaining_tickets = array($remVip,  $remRegular);
         return $remaining_tickets;
@@ -109,10 +109,10 @@ class manageEvents extends dbconnection
         $query = "UPDATE churchill_event_tickets.events SET `name`=?, `location`=?, `time`=?, `description`=?, `vip_allocation`=?,`regular_allocation`=?,`vip_price`=?, `regular_price`=?, `banner`=? WHERE `event_id` = ?";
         $pre = $this->connectDb()->prepare($query);
         $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);
-      
+
         echo '<script> alert(\'Event successfully eddited\')</script>';
         echo '<script> window.open(\'../views/events.php\',\'_self\')</script>';
-               // header('Location: ../views/events.php');
+        // header('Location: ../views/events.php');
     }
     public function submitEvent(
         $name,
@@ -137,7 +137,7 @@ class manageEvents extends dbconnection
             header('Location: ../views/addEvent.php');
             return;
         }
-        
+
         if ((!preg_match("#[0-9]+#", $vip_price)) || (!preg_match("#[0-9]+#", $regular_price))) {
             $error = "Ticket price should be in digits";
             $_SESSION['errors'] = $error;
@@ -164,9 +164,11 @@ class manageEvents extends dbconnection
 ) ";
         try {
             $this->connectDb()->exec($createEvent);
-            $messages = 'Event created successfully';
-            $_SESSION['messages'] = $messages;
-            header("Location: ../views/events.php");
+            // $messages = 'Event created successfully';
+            // $_SESSION['messages'] = $messages;
+            // header("Location: ../views/events.php");
+            echo '<script> alert(\'Event created successfully\')</script>';
+            echo '<script> window.open(\'../views/events.php\',\'_self\')</script>';
         } catch (Exception $e) {
             echo "ERROR: " . $e->getMessage();
         }
