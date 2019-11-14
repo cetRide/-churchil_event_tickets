@@ -109,7 +109,7 @@ if (!isset($_SESSION['email'])) {
                                                             </div>
                                                             <div class="mb-2">
                                                                 <label for="starts">Regular ticket slots</label>
-                                                                <input class="form-control form-control-sm" type="text" name="regular_quantity" value="<?php echo $event['vip_allocation']; ?>" required>
+                                                                <input class="form-control form-control-sm" type="text" name="regular_quantity" value="<?php echo $event['regular_allocation']; ?>" required>
                                                             </div>
                                                             <div class="my-4">
                                                                 <p>Nice job! You're almost done.</p>

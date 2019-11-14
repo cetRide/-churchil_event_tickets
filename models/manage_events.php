@@ -111,7 +111,7 @@ class manageEvents extends dbconnection
         $pre->execute([$name, $location, $date, $description, $vip_quantity, $regular_quantity, $vip_price, $regular_price, $banner, $id]);
 
         echo '<script> alert(\'Event successfully eddited\')</script>';
-        echo '<script> window.open(\'../views/events.php\',\'_self\')</script>';
+        // echo '<script> window.open(\'../views/events.php\',\'_self\')</script>';
         // header('Location: ../views/events.php');
     }
     public function submitEvent(
