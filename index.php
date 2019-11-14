@@ -81,62 +81,8 @@
 
                             ?>
                         <div class="carousel-item <?php echo $slide_active; ?>">
-                            <!-- <div class="">
-                                <div class="card z-depth-5 hoverable">
-                                    <div class="row d-flex justify-content-between border">
-                                        <div class="col-sm-4 mb-1 view overlay border zoom">
-                                            <img src="images/<?php echo $event['banner']; ?>" class="img-fluid rounded" style="height: 350px; width: 100%; display: block; color: green; font-size: 36px; font-style: italic; font-family: Georgia, serif;" alt="This Event has no banner...">
-                                        </div>
-                                        <div class="col-md p-3">
-                                            <div>
-                                                <p class="h4 text-center my-3">Event description</p>
-                                                <div class="col-md-8 ml-auto mr-auto border p-4" style="border-radius: 15px;">
-                                                    <p><?php echo $event['description'] = ucfirst($event['description']); ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="col ml-auto mr-auto p-4 row d-flex justify-content-between" style="border-radius: 15px;">
-                                                <div class="d-inline-block ">
-                                                    <p class="h3">
-                                                        Regular
-                                                    </p>
-                                                    <p>@<?php echo $event['regular_price']; ?> Ksh
-                                                    </p>
-                                                </div>
-                                                <div class="d-inline-block px-4">
-                                                    <p class="h3">
-                                                        VIP
-                                                    </p>
-                                                    <p>@ <?php echo $event['vip_price']; ?> Ksh
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 ml-auto mr-auto">
-                                                <form action="controllers/reservation.php" method="POST">
-                                                    <input type="hidden" name="event_id" value="<?php echo $event['event_id']; ?>">
-                                                    <input type="hidden" name="event_name" value="<?php echo $event['name']; ?>">
-                                                    <input type="hidden" name="regular_price" value="<?php echo $event['regular_price']; ?>">
-                                                    <input type="hidden" name="vip_price" value="<?php echo $event['vip_price'] ?>">
-                                                    <input type="hidden" name="location" value="<?php echo $event['location']; ?>">
-                                                    <input type="hidden" name="date" value="<?php echo $event['time'] ?>">
-                                                    <button type="submit" name="reserve" class="btn btn-danger btn-sm btn-block">Buy Ticket</button>
-                                                </form>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" mt-3 col-md-4 px-5 mb-3">
-                                        <h4><?php echo $event['name'] = ucfirst($event['name']); ?></h4>
-                                        <p class="small m-0"><i class="fas fa-map-marker-alt mr-4 text-danger"></i>
-                                            <?php echo $event['location'] = ucfirst($event['location']); ?></p>
-                                        <p class="small m-0 my-3"><i aria-hidden="true" class="fa fa-calendar text-danger mr-4"></i>
-                                            <?php echo $event['time'] = date("F j, Y, g:i a"); ?></p>
-
-
-                                    </div>
-
-                                </div>
-                            </div> -->
-                            <div id="container">
+                         
+                            <div class="container"id="container">
                                 <!-- Startevent details -->
                                 <div class="event-details p-3">
                                     <!-- 	event Name -->

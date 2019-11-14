@@ -70,8 +70,8 @@ textarea[name=comment] {
     overflow: hidden;
     margin: 5em auto;
     height: auto;
-    width: 700px;
-    position: relative;
+    /* width: 700px; */
+    /* position: relative; */
 
   }
 
