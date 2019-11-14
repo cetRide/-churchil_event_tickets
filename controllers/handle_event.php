@@ -247,14 +247,14 @@ if (isset($_POST['edit_event'])) {
             } else {
                 $error = "Error occured during file upload";
                 $_SESSION['errors'] = $error;
-                // header('Location: ../views/addEvent.php');
+                header('Location: ../views/addEvent.php');
                 return;
             }
         } else {
 
             $error = "The type of file Uploaded is not allowed, only images are allowed";
             $_SESSION['errors'] = $error;
-            // header('Location: ../views/addEvent.php');
+            header('Location: ../views/addEvent.php');
             return;
         }
     }
